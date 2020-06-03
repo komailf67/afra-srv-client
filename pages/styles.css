@@ -1,0 +1,22 @@
+body {
+    direction: rtl;
+    background-color: gray;
+    /* width: 2000px; */
+}
+
+div.container {
+    max-width: 1500px;
+}
+
+.modal-w {
+    width: 220%;
+}
+
+/* TODO */
+.modal-position {
+    width: 130%;
+}
+
+.modal {
+    overflow: auto !important;
+}
