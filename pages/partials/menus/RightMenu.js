@@ -1,29 +1,47 @@
-import React , { Component } from "react";
-import { Card , ListGroup , Col} from "react-bootstrap";
+import React, {Component} from "react";
+import {Card, ListGroup, Col} from "react-bootstrap";
 // import { Link } from "react-router-dom";
 import Router from 'next/router'
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 class RightMenu extends Component {
-    
+
+    logout = () => {
+        let token = localStorage.getItem('access_token');
+        let config = {
+            headers: {'Authorization': "bearer " + token}
+        };
+        //TODO
+        axios.get(
+            'http://127.0.0.1/api/logout',
+            config
+        ).then(response => {
+            let {success, message} = response.data;
+            window.location.replace("/");
+        }).catch(error => {
+
+        });
+    }
+
     render() {
         const onClickHandler = (href) => {
             return e => {
-              e.preventDefault()
-              Router.push(href)
+                e.preventDefault()
+                Router.push(href)
             }
-          }
-          
-          const Link = ({ children, href }) => (              
+        }
+
+        const Link = ({children, href}) => (
             <a href="#" onClick={onClickHandler(href)}>
-              {children}
-              <style jsx>{`
+                {children}
+                <style jsx>{`
                 a {
                   margin-right: 10px;
                 }
               `}</style>
             </a>
-          )
+        )
         return (
             <Col sm={2} className="text-right">
                 <Card>
@@ -56,10 +74,17 @@ class RightMenu extends Component {
                         <ListGroup.Item>
                             <Link href="/sales/invoices">فاکتورهای فروش</Link>
                         </ListGroup.Item>
+                        <ListGroup.Item>
+                            <h6
+                                style={{'padding-right': '10px', 'cursor': 'pointer', 'color': 'red'}}
+                                onClick={this.logout}
+                            >خروج</h6>
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card>
             </Col>
         )
     }
 }
+
 export default RightMenu;

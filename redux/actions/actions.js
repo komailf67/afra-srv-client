@@ -25,9 +25,24 @@ import {
     SHOW_ONE_PRE_INVOICE_DETAILS
 } from '../../pages/partials/consts/actionsConstants.js';
 import axios from 'axios';
+import {IS_TOKEN_VALID, TOKEN_DOES_NOT_VALID} from "../../pages/partials/consts/actionsConstants";
 
 
 // Actions
+export const isTokenValid = (success) => {
+    return {
+        type: IS_TOKEN_VALID,
+        payload: success
+    }
+};
+
+export const tokenDoesNotValid = (success) => {
+    return {
+        type: TOKEN_DOES_NOT_VALID,
+        payload: success
+    }
+};
+
 export const addOrder = (order) => {
     return {
         type: ADD_ORDERS,
@@ -205,6 +220,20 @@ export function dispatchActions(url, actionType, data) {
     return (dispatch) => {
 
         switch (actionType) {
+            case IS_TOKEN_VALID:
+                axios.get(url, data)
+                    .then((response) => {
+                        console.log('aaaaaaaaaaaaaaaaaaa', response)
+                        let {success, message} = response.data;
+                        if (success) {
+                            dispatch(isTokenValid(success))
+                        } else {
+                            dispatch(tokenDoesNotValid(success))
+                        }
+                    }).catch(e => {
+                    console.log(e);
+                })
+                break;
 
             case ADD_ORDERS:
                 axios.post(url, data)

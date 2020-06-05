@@ -8,8 +8,10 @@ import {messageReducer} from "./messageReducer";
 import {ordersReducer} from "./orderReducers";
 import {productsListReducer} from "./productsListReducer";
 import {preInvoicesReducer} from "./preInvoicesReducer";
+import {authReducers} from "./authReducers";
 
 const rootReduces = combineReducers({
+    auth: authReducers,
     categories: categoryReducer,
     products: productsReducer,
     formReducer: formReducer,
