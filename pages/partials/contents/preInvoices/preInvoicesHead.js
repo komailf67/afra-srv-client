@@ -18,13 +18,13 @@ class OrdersHead extends Component {
     }
 
     componentDidMount = () => {
-        this.props.fetchData('http://127.0.0.1/api/pre-invoices', PRE_INVOICES);
+        let token = localStorage.getItem('access_token');
+        this.props.fetchData('http://127.0.0.1/api/pre-invoices', PRE_INVOICES, '', token);
     }
 
     render() {
         let { preInvoices, is_open_modal, preInvoiceDetails } = this.props;
         let preInvoiceRow = [];
-        console.log('sdfdsfsdfdsfdsfsdfdsfds', preInvoiceDetails)
 
         if (preInvoices) {
             preInvoiceRow = preInvoices.map((value, index) => {
@@ -65,7 +65,7 @@ class OrdersHead extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 const mapStateToProps = (state) => {

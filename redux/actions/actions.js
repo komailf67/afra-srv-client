@@ -216,9 +216,11 @@ export const messageShowed = (trueOrFalse) => {
     }
 }
 
-export function dispatchActions(url, actionType, data) {
+export function dispatchActions(url, actionType, data, token) {
     return (dispatch) => {
-
+        let config = {
+            headers: {'Authorization': "bearer " + token}
+        };
         switch (actionType) {
             case IS_TOKEN_VALID:
                 axios.get(url, data)
@@ -334,7 +336,7 @@ export function dispatchActions(url, actionType, data) {
                     })
                 break;
             case PRE_INVOICES:
-                axios.get(url)
+                axios.get(url, config)
                     .then((response) => {
                         dispatch(preInvoices(response.data))
                         return response;

@@ -23,7 +23,6 @@ class PreInvoiceProductsModal extends Component {
     }
 
     componentDidMount = () => {
-        console.log('asdasdassadassdfsdfggfdgdfgdfhfghgfhfghgffg')
         // let This = this;
         // $('button.btn-success').click(function () {
         //     let commonDetails = {};
@@ -63,7 +62,6 @@ class PreInvoiceProductsModal extends Component {
         let detailsRow = [];
         if (preInvoiceDetails && is_open_modal) {
             detailsRow = preInvoiceDetails.data.map((value, index) => {
-                console.log('tttttttttttttttttttt', value)
                 return [<PreInvoiceDetailsItem key={index} row={index} preInvoiceDetails={value}/>]
             });
         }

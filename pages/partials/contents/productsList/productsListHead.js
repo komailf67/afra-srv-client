@@ -5,7 +5,6 @@ import ProductsListItem from "./productsListItem";
 import {dispatchActions} from "../../../../redux/actions";
 import {
     CATEGORIES,
-    IS_OPEN_MODAL,
     MESSAGE_SHOWED,
     PRODUCTS_LIST, SELECTED_PRODUCTS_LIST_FOR_PRE_INVOICE,
     SELECTED_PRODUCTS_LIST_FOR_STORAGE
@@ -70,7 +69,7 @@ class productsListHead extends Component {
             let {message, success} = newProductsList;
 
             if (!messageShowed) {
-                alert(message);
+                // alert(message);
                 this.props.fetchData('', MESSAGE_SHOWED, 1);
             }
             if (success) {

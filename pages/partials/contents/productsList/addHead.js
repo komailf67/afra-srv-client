@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Form, Button, Col, FormControl, InputGroup} from 'react-bootstrap';
 import {connect} from "react-redux";
 import {dispatchActions} from "../../../../redux/actions";
-import {ADD_TO_PRODUCTS_LIST} from "../../consts/actionsConstants";
+import {ADD_TO_PRODUCTS_LIST, MESSAGE_SHOWED} from "../../consts/actionsConstants";
 import $ from "jquery";
 import dynamic from "next/dynamic";
 
@@ -40,6 +40,7 @@ class AddHead extends Component {
         if (formFilled) {
             this.props.fetchData('http://127.0.0.1/api/products-list', ADD_TO_PRODUCTS_LIST, newProduct);
         }
+        // this.props.fetchData('', MESSAGE_SHOWED, 1);
     }
 
 
