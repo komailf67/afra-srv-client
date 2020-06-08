@@ -46,8 +46,7 @@ class AddProductsToStorageModal extends Component {
             let productsToAdd = {};
             productsToAdd['commonDetails'] = commonDetails;
             productsToAdd['uncommonDetails'] = productsDetails;
-            console.log('baggggggggggggggggg',productsToAdd)
-            This.props.fetchData('http://127.0.0.1/api/products-list/add-to-storage', ADD_TO_STORAGE, productsToAdd);
+            This.props.fetchData('http://automation.afra.local/api/products-list/add-to-storage', ADD_TO_STORAGE, productsToAdd);
         });
     }
 

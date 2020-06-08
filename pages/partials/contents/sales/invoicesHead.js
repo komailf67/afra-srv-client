@@ -9,7 +9,7 @@ import SaleInvoiceModal from "./saleInvoiceModal";
 
 class InvoicesHead extends Component {
     componentDidMount() {
-        this.props.fetchData('http://127.0.0.1/api/sales/invoices', SALES_INVOICES);
+        this.props.fetchData('http://automation.afra.local/api/sales/invoices', SALES_INVOICES);
     }
 
     render() {

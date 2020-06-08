@@ -24,7 +24,7 @@ class Login extends Component {
     }
 
     login = () => {
-        axios.post('http://127.0.0.1/api/login', {
+        axios.post('http://automation.afra.local/api/login', {
             email: $('#email').val(),
             password: $('#password').val(),
             role: $('#roles').val()

@@ -23,7 +23,6 @@ class OrderProductsModal extends Component {
     }
 
     componentDidMount = () => {
-        console.log('asdasdassadassdfsdfggfdgdfgdfhfghgfhfghgffg')
         // let This = this;
         // $('button.btn-success').click(function () {
         //     let commonDetails = {};
@@ -48,7 +47,7 @@ class OrderProductsModal extends Component {
         //     let soldProducts = {};
         //     soldProducts['commonDetails'] = commonDetails;
         //     soldProducts['uncommonDetails'] = productsDetails;
-        //     This.props.fetchData('http://127.0.0.1/api/sales', SALE_PRODUCTS, soldProducts);
+        //     This.props.fetchData('http://automation.afra.local/api/sales', SALE_PRODUCTS, soldProducts);
         // });
     }
 
@@ -59,7 +58,6 @@ class OrderProductsModal extends Component {
     render() {
         let {selectedInvoice, is_open_modal, orderDetails} = this.props;
 
-        console.log('alireza', orderDetails)
         let detailsRow = [];
         if (orderDetails && is_open_modal) {
             detailsRow = orderDetails.data.map((value, index) => {

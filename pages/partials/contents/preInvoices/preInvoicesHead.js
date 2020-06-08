@@ -19,7 +19,7 @@ class OrdersHead extends Component {
 
     componentDidMount = () => {
         let token = localStorage.getItem('access_token');
-        this.props.fetchData('http://127.0.0.1/api/pre-invoices', PRE_INVOICES, '', token);
+        this.props.fetchData('http://automation.afra.local/api/pre-invoices', PRE_INVOICES, '', token);
     }
 
     render() {

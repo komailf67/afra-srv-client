@@ -46,7 +46,7 @@ class SaleModal extends Component {
             let soldProducts = {};
             soldProducts['commonDetails'] = commonDetails;
             soldProducts['uncommonDetails'] = productsDetails;
-            This.props.fetchData('http://127.0.0.1/api/sales', SALE_PRODUCTS, soldProducts);
+            This.props.fetchData('http://automation.afra.local/api/sales', SALE_PRODUCTS, soldProducts);
         });
     }
 

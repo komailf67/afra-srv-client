@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 class AddHead extends Component {
 
     componentDidMount = () => {
-        // this.props.fetchData('http://127.0.0.1/api/products/descriptions', PRODUCTS_DESCRIPTIONS)
+        // this.props.fetchData('http://automation.afra.local/api/products/descriptions', PRODUCTS_DESCRIPTIONS)
     }
 
     updateCategorySelectBox = (newCategory) => {
@@ -36,9 +36,8 @@ class AddHead extends Component {
                 return false;
             }
         });
-        console.log('asdasdasdadasdasdasdasdsadadads', newProduct)
         if (formFilled) {
-            this.props.fetchData('http://127.0.0.1/api/products-list', ADD_TO_PRODUCTS_LIST, newProduct);
+            this.props.fetchData('http://automation.afra.local/api/products-list', ADD_TO_PRODUCTS_LIST, newProduct);
         }
         // this.props.fetchData('', MESSAGE_SHOWED, 1);
     }

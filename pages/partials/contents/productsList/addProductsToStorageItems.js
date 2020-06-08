@@ -45,7 +45,6 @@ class AddProductsToStorageItems extends Component {
     render() {
         let {row, product} = this.props;
         let exist_count = product.exist_count;
-        console.log('aslllllllllllllll', product)
         let ExistCountRows = [];
         for (let index = 1; index <= exist_count; index++) {
             ExistCountRows.push(<option>{index}</option>)

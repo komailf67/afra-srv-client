@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 
 class SoldProductsHead extends Component {
     componentDidMount() {
-        this.props.fetchData('http://127.0.0.1/api/sales/products', SOLD_PRODUCTS);
+        this.props.fetchData('http://automation.afra.local/api/sales/products', SOLD_PRODUCTS);
     }
 
     render() {

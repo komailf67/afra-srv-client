@@ -14,7 +14,7 @@ class RightMenu extends Component {
         };
         //TODO
         axios.get(
-            'http://127.0.0.1/api/logout',
+            'http://automation.afra.local/api/logout',
             config
         ).then(response => {
             let {success, message} = response.data;

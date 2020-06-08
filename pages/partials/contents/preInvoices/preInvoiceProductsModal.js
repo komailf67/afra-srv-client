@@ -47,7 +47,7 @@ class PreInvoiceProductsModal extends Component {
         //     let soldProducts = {};
         //     soldProducts['commonDetails'] = commonDetails;
         //     soldProducts['uncommonDetails'] = productsDetails;
-        //     This.props.fetchData('http://127.0.0.1/api/sales', SALE_PRODUCTS, soldProducts);
+        //     This.props.fetchData('http://automation.afra.local/api/sales', SALE_PRODUCTS, soldProducts);
         // });
     }
 
@@ -58,7 +58,6 @@ class PreInvoiceProductsModal extends Component {
     render() {
         let {selectedInvoice, is_open_modal, preInvoiceDetails} = this.props;
 
-        console.log('alireza', preInvoiceDetails)
         let detailsRow = [];
         if (preInvoiceDetails && is_open_modal) {
             detailsRow = preInvoiceDetails.data.map((value, index) => {

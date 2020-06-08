@@ -10,7 +10,6 @@ class SalesInvoicesItem extends Component {
     //
     //     // let thisProps = this.props;
     //     // $('button.btn-primary').click(function(){
-    //     //     console.log('komail', thisProps)
     //         // let selectedProductsId = [];
     //         // $('input:checked').each(function () {
     //         //     selectedProductsId.push($(this).data('product-id'));

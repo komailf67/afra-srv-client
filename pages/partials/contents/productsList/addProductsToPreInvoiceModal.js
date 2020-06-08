@@ -47,8 +47,7 @@ class AddProductsToPreInvoiceModal extends Component {
             let productsToAdd = {};
             productsToAdd['commonDetails'] = commonDetails;
             productsToAdd['uncommonDetails'] = productsDetails;
-            console.log('baggggggggggggggggg',productsToAdd)
-            This.props.fetchData('http://127.0.0.1/api/products-list/add-to-pre-invoice', ADD_TO_PRE_INVOICE, productsToAdd);
+            This.props.fetchData('http://automation.afra.local/api/products-list/add-to-pre-invoice', ADD_TO_PRE_INVOICE, productsToAdd);
         });
     }
 

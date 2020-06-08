@@ -8,7 +8,7 @@ class OrdersItem extends Component {
 
     showProducts = () => {
         let orderId = this.props.order.id;
-        this.props.fetchData(`http://127.0.0.1/api/orders/${orderId}`, SHOW_ONE_ORDER_DETAILS);
+        this.props.fetchData(`http://automation.afra.local/api/orders/${orderId}`, SHOW_ONE_ORDER_DETAILS);
         this.props.fetchData('', IS_OPEN_MODAL, 1);
     }
 

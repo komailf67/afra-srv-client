@@ -20,7 +20,7 @@ class ProductsHead extends Component {
     }
 
     componentDidMount = () => {
-        this.props.fetchData('http://127.0.0.1/api/products', PRODUCTS);
+        this.props.fetchData('http://automation.afra.local/api/products', PRODUCTS);
         this.props.fetchData('', IS_OPEN_MODAL, 0);
 
         let thisProps = this.props;

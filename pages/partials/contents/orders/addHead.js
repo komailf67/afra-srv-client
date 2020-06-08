@@ -27,8 +27,8 @@ class AddHead extends Component {
     }
     
     componentDidMount = () => {
-        this.props.fetchData('http://127.0.0.1/api/categories', CATEGORIES)
-        this.props.fetchData('http://127.0.0.1/api/products/descriptions', PRODUCTS_DESCRIPTIONS)
+        this.props.fetchData('http://automation.afra.local/api/categories', CATEGORIES)
+        this.props.fetchData('http://automation.afra.local/api/products/descriptions', PRODUCTS_DESCRIPTIONS)
         //START jquery functions
         //delete row
         $(document).on('click', '.btn-danger', function () {
@@ -73,7 +73,7 @@ class AddHead extends Component {
         let orders = {};
         orders['commonDetails'] = buyerDetails;
         orders['uncommonDetails'] = newOrder;
-        this.props.fetchData('http://127.0.0.1/api/orders', ADD_ORDERS, orders);
+        this.props.fetchData('http://automation.afra.local/api/orders', ADD_ORDERS, orders);
     }
 
     resetForm = () => {

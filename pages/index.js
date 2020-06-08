@@ -27,13 +27,12 @@ class Index extends Component {
         let config = {
             headers: {'Authorization': "bearer " + token}
         };
-        this.props.fetchData('http://127.0.0.1/api/is-token-valid', IS_TOKEN_VALID, config);
+        this.props.fetchData('http://automation.afra.local/api/is-token-valid', IS_TOKEN_VALID, config);
     }
 
     render() {
 
         let {isUserLoggedIn} = this.props
-        console.log('tttttttttttt', isUserLoggedIn)
         let componentToShow;
 
         switch (isUserLoggedIn) {
@@ -41,7 +40,6 @@ class Index extends Component {
                 componentToShow = <Home/>;
                 break;
             case false:
-                console.log('yyyyyyyyyyyyyy')
                 componentToShow = <Login/>;
                 break;
             default:

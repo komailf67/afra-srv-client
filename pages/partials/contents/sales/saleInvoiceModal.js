@@ -23,7 +23,6 @@ class SaleInvoiceModal extends Component {
     }
 
     componentDidMount = () => {
-        console.log('asdasdassadassdfsdfggfdgdfgdfhfghgfhfghgffg')
         // let This = this;
         // $('button.btn-success').click(function () {
         //     let commonDetails = {};
@@ -48,7 +47,7 @@ class SaleInvoiceModal extends Component {
         //     let soldProducts = {};
         //     soldProducts['commonDetails'] = commonDetails;
         //     soldProducts['uncommonDetails'] = productsDetails;
-        //     This.props.fetchData('http://127.0.0.1/api/sales', SALE_PRODUCTS, soldProducts);
+        //     This.props.fetchData('http://automation.afra.local/api/sales', SALE_PRODUCTS, soldProducts);
         // });
     }
 
@@ -58,7 +57,6 @@ class SaleInvoiceModal extends Component {
 
     render() {
         let {selectedInvoice, is_open_modal} = this.props;
-        console.log('aliiiiiiiiiiiiiiiiiii', selectedInvoice)
         let soldProducts = selectedInvoice.products.map((value, index) => {
             return [<SalesInvoicesItemModal key={index} row={index} product={value}/>]
         });

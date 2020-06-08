@@ -38,7 +38,6 @@ class AddProductsToPreInvoiceItems extends Component {
             // eachProduct['sumSalePrice'] = $(value).find('input.sum-sale-price').val();
             // sum.push(eachProduct)
         });
-        console.log('asasdsadadasdsaasdsds', sumInvoicePrice*(Number(profit) + 9))
 
         $('#invoice-sum').val(sumInvoicePrice);
     //     $('#acceptable-sum').val(acceptablePrice);
@@ -46,7 +45,6 @@ class AddProductsToPreInvoiceItems extends Component {
     render() {
         let {row, product} = this.props;
         let exist_count = product.exist_count;
-        console.log('aslllllllllllllll', product)
         let ExistCountRows = [];
         for (let index = 1; index <= exist_count; index++) {
             ExistCountRows.push(<option>{index}</option>)

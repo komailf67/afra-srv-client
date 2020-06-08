@@ -19,7 +19,7 @@ class OrdersHead extends Component {
 
     componentDidMount = () => {
         // this.props.fetchData('', IS_OPEN_MODAL, 1);
-        this.props.fetchData('http://127.0.0.1/api/orders', ORDERS);
+        this.props.fetchData('http://automation.afra.local/api/orders', ORDERS);
     }
 
     render() {

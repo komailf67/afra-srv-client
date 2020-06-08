@@ -8,7 +8,7 @@ class PreInvoicesItem extends Component {
 
     showProducts = () => {
         let preInvoiceId = this.props.preInvoice.id;
-        this.props.fetchData(`http://127.0.0.1/api/pre-invoices/${preInvoiceId}`, SHOW_ONE_PRE_INVOICE_DETAILS);
+        this.props.fetchData(`http://automation.afra.local/api/pre-invoices/${preInvoiceId}`, SHOW_ONE_PRE_INVOICE_DETAILS);
         this.props.fetchData('', IS_OPEN_MODAL, 1);
     }
 
