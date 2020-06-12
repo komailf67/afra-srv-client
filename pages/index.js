@@ -5,7 +5,7 @@ import {Card, Container, Row, Col} from "react-bootstrap";
 import './styles.css';
 import Content from "./partials/Content";
 import Head from "./partials/contents/sales/soldProductsHead";
-import Login from "./Auth/login";
+import Login from "./auth/login";
 import Home from "./home";
 import {
     IS_TOKEN_VALID,

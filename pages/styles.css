@@ -20,3 +20,14 @@ div.container {
 .modal {
     overflow: auto !important;
 }
+
+.loginCenter {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-link {
+    cursor: pointer;
+    color: blue;
+}

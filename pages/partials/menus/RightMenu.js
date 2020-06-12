@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Card, ListGroup, Col} from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import Router from 'next/router'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
@@ -76,7 +75,7 @@ class RightMenu extends Component {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h6
-                                style={{'padding-right': '10px', 'cursor': 'pointer', 'color': 'red'}}
+                                style={{'paddingRight': '10px', 'cursor': 'pointer', 'color': 'red'}}
                                 onClick={this.logout}
                             >خروج</h6>
                         </ListGroup.Item>
