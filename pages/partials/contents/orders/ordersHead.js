@@ -19,7 +19,7 @@ class OrdersHead extends Component {
 
     componentDidMount = () => {
         // this.props.fetchData('', IS_OPEN_MODAL, 1);
-        this.props.fetchData('http://automation.afra.local/api/orders', ORDERS);
+        this.props.fetchData('http://automation.afra.local/api/orders', ORDERS, '', localStorage.getItem('access_token'));
     }
 
     render() {
@@ -62,7 +62,7 @@ class OrdersHead extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 const mapStateToProps = (state) => {

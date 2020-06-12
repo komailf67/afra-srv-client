@@ -238,7 +238,7 @@ export function dispatchActions(url, actionType, data, token) {
                 break;
 
             case ADD_ORDERS:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(isFormSubmitted(response.data.success))
                         dispatch(addProduct(response.data))
@@ -247,7 +247,7 @@ export function dispatchActions(url, actionType, data, token) {
                 })
                 break;
             case ORDERS:
-                axios.get(url)
+                axios.get(url, config)
                     .then((response) => {
                         dispatch(orders(response.data))
                         return response;

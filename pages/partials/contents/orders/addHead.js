@@ -73,7 +73,7 @@ class AddHead extends Component {
         let orders = {};
         orders['commonDetails'] = buyerDetails;
         orders['uncommonDetails'] = newOrder;
-        this.props.fetchData('http://automation.afra.local/api/orders', ADD_ORDERS, orders);
+        this.props.fetchData('http://automation.afra.local/api/orders', ADD_ORDERS, orders, localStorage.getItem('access_token'));
     }
 
     resetForm = () => {
@@ -103,7 +103,7 @@ class AddHead extends Component {
                     </Form.Group>
                     <Form.Group as={Col} controlId="phone-number">
                         <Form.Label>شماره تماس</Form.Label>
-                        <Form.Control type="tel" placeholder="" />
+                        <Form.Control type="number" placeholder="" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row className="uncommon-inputs">
@@ -123,13 +123,14 @@ class AddHead extends Component {
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>توضیح مدل</Form.Label>
+                        {/*//TODO autocomplete after add new input*/}
                         <Autocomplete
                             suggestions={productsDescriptions}
                         />
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>تعداد</Form.Label>
-                        <Form.Control className="count"/>
+                        <Form.Control type="number" className="count"/>
                     </Form.Group>
                 </Form.Row>
                 <Button variant="primary" type="button" onClick={this.submitForm}>
@@ -141,7 +142,7 @@ class AddHead extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 const mapStateToProps = (state) => {
