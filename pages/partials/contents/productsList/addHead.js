@@ -37,7 +37,7 @@ class AddHead extends Component {
             }
         });
         if (formFilled) {
-            this.props.fetchData('http://automation.afra.local/api/products-list', ADD_TO_PRODUCTS_LIST, newProduct);
+            this.props.fetchData('http://automation.afra.local/api/products-list', ADD_TO_PRODUCTS_LIST, newProduct, localStorage.getItem('access_token'));
         }
         // this.props.fetchData('', MESSAGE_SHOWED, 1);
     }
@@ -82,7 +82,7 @@ class AddHead extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 

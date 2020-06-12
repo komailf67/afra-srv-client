@@ -13,6 +13,8 @@ import {
     PRODUCTS_DESCRIPTIONS,
     SALE_INVOICE_TO_SHOW,
 
+    IS_TOKEN_VALID,
+    TOKEN_DOES_NOT_VALID,
     ADD_ORDERS,
     SHOW_ONE_ORDER_DETAILS,
     PRODUCTS_LIST,
@@ -22,10 +24,10 @@ import {
     SELECTED_PRODUCTS_LIST_FOR_PRE_INVOICE,
     ADD_TO_PRE_INVOICE,
     PRE_INVOICES,
-    SHOW_ONE_PRE_INVOICE_DETAILS
+    SHOW_ONE_PRE_INVOICE_DETAILS,
+    ADD_CATEGORY
 } from '../../pages/partials/consts/actionsConstants.js';
 import axios from 'axios';
-import {IS_TOKEN_VALID, TOKEN_DOES_NOT_VALID} from "../../pages/partials/consts/actionsConstants";
 
 
 // Actions
@@ -143,6 +145,13 @@ export const categories = (categories) => {
     }
 }
 
+export const addCategory = (newCategory) => {
+    return {
+        type: ADD_CATEGORY,
+        payload: newCategory
+    }
+}
+
 export const addProduct = (products) => {
     return {
         type: ADD_PRODUCTS,
@@ -150,10 +159,11 @@ export const addProduct = (products) => {
     }
 }
 
-export const isFormSubmitted = (success) => {
+export const isFormSubmitted = (success, message) => {
     return {
         type: IS_FORM_SUBMITTED,
-        success
+        success,
+        message
     }
 }
 
@@ -254,7 +264,7 @@ export function dispatchActions(url, actionType, data, token) {
                     })
                 break;
             case SHOW_ONE_ORDER_DETAILS:
-                axios.get(url)
+                axios.get(url, config)
                     .then((response) => {
                         dispatch(showOneOrderDetails(response.data))
                         return response;
@@ -262,22 +272,23 @@ export function dispatchActions(url, actionType, data, token) {
                 break;
 
             case SHOW_ONE_PRE_INVOICE_DETAILS:
-                axios.get(url)
+                axios.get(url, config)
                     .then((response) => {
+                        console.log('eeeeeeeeeeeeeeeeee', response)
                         dispatch(showOnePreInvoiceDetails(response.data))
                         return response;
                     })
                 break;
 
             case PRODUCTS_LIST:
-                axios.get(url)
+                axios.get(url, config)
                     .then((response) => {
                         dispatch(productsList(response.data))
                         return response;
                     })
                 break;
             case ADD_TO_PRODUCTS_LIST:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(isFormSubmitted(response.data.success))
                         dispatch(addToProductsList(response.data))
@@ -290,7 +301,7 @@ export function dispatchActions(url, actionType, data, token) {
                     })
                 break;
             case SELECTED_PRODUCTS_LIST_FOR_STORAGE:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(selectedProductsList(response.data))
                         return response;
@@ -299,7 +310,7 @@ export function dispatchActions(url, actionType, data, token) {
                 })
                 break;
             case SELECTED_PRODUCTS_LIST_FOR_PRE_INVOICE:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(selectedProductsListForPreInvoice(response.data))
                         return response;
@@ -309,7 +320,7 @@ export function dispatchActions(url, actionType, data, token) {
                 break;
 
             case ADD_TO_STORAGE:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(addToStorage(response.data))
                     })
@@ -323,7 +334,7 @@ export function dispatchActions(url, actionType, data, token) {
                 break;
 
             case ADD_TO_PRE_INVOICE:
-                axios.post(url, data)
+                axios.post(url, data, config)
                     .then((response) => {
                         dispatch(addToPreInvoice(response.data))
                     })
@@ -365,6 +376,19 @@ export function dispatchActions(url, actionType, data, token) {
                         return response;
                     })
                 break;
+            case ADD_CATEGORY:
+                axios.post(url, data, config)
+                    .then((response) => {
+                        let {message, success} = response.data;
+                        dispatch(isFormSubmitted(success, message))
+                        if (success) {
+                            dispatch(addCategory(response.data))
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    })
+                break;
             case ADD_PRODUCTS:
                 axios.post(url,
                     {
@@ -382,6 +406,9 @@ export function dispatchActions(url, actionType, data, token) {
                 break;
             case IS_FORM_SUBMITTED:
                 dispatch(isFormSubmitted(data))
+                break;
+            case MESSAGE_SHOWED:
+                dispatch(messageShowed(data))
                 break;
             case SALES_INVOICES:
                 axios.get(url)

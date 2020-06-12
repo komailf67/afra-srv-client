@@ -26,7 +26,7 @@ class productsListHead extends Component {
 
     componentDidMount = () => {
         this.props.fetchData('http://automation.afra.local/api/categories', CATEGORIES)
-        this.props.fetchData('http://automation.afra.local/api/products-list', PRODUCTS_LIST);
+        this.props.fetchData('http://automation.afra.local/api/products-list', PRODUCTS_LIST, '', localStorage.getItem('access_token'));
 
         let This = this;
         $('button.add-to-storage').click(function () {
@@ -39,7 +39,7 @@ class productsListHead extends Component {
             });
             let selectedProducts = {};
             selectedProducts['productsIds'] = JSON.stringify(productsId);
-            This.props.fetchData('http://automation.afra.local/api/products-list/products', SELECTED_PRODUCTS_LIST_FOR_STORAGE, selectedProducts);
+            This.props.fetchData('http://automation.afra.local/api/products-list/products', SELECTED_PRODUCTS_LIST_FOR_STORAGE, selectedProducts, localStorage.getItem('access_token'));
         });
 
         $('button.add-to-pre-invoice').click(function () {
@@ -52,7 +52,7 @@ class productsListHead extends Component {
             });
             let selectedProducts = {};
             selectedProducts['productsIds'] = JSON.stringify(productsId);
-            This.props.fetchData('http://automation.afra.local/api/products-list/products', SELECTED_PRODUCTS_LIST_FOR_PRE_INVOICE, selectedProducts);
+            This.props.fetchData('http://automation.afra.local/api/products-list/products', SELECTED_PRODUCTS_LIST_FOR_PRE_INVOICE, selectedProducts, localStorage.getItem('access_token'));
         });
     }
 
@@ -119,7 +119,7 @@ class productsListHead extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 const mapStateToProps = (state) => {

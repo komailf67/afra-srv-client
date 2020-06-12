@@ -8,7 +8,8 @@ class OrdersItem extends Component {
 
     showProducts = () => {
         let orderId = this.props.order.id;
-        this.props.fetchData(`http://automation.afra.local/api/orders/${orderId}`, SHOW_ONE_ORDER_DETAILS);
+        console.log('rtrtrtrtrt', localStorage.getItem('access_token'))
+        this.props.fetchData(`http://automation.afra.local/api/orders/${orderId}`, SHOW_ONE_ORDER_DETAILS, '', localStorage.getItem('access_token'));
         this.props.fetchData('', IS_OPEN_MODAL, 1);
     }
 
@@ -32,7 +33,7 @@ class OrdersItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 

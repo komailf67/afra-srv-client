@@ -8,7 +8,7 @@ class PreInvoicesItem extends Component {
 
     showProducts = () => {
         let preInvoiceId = this.props.preInvoice.id;
-        this.props.fetchData(`http://automation.afra.local/api/pre-invoices/${preInvoiceId}`, SHOW_ONE_PRE_INVOICE_DETAILS);
+        this.props.fetchData(`http://automation.afra.local/api/pre-invoices/${preInvoiceId}`, SHOW_ONE_PRE_INVOICE_DETAILS, '', localStorage.getItem('access_token'));
         this.props.fetchData('', IS_OPEN_MODAL, 1);
     }
 
@@ -35,7 +35,7 @@ class PreInvoicesItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 

@@ -56,10 +56,10 @@ class RightMenu extends Component {
                             <Link href="/orders/orders">لیست سفارشات</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Link href="/preInvoices/preInvoices">پیش فاکتورها</Link>
+                            <Link href="/products/productsList">لیست کالاها</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Link href="/products/productsList">لیست کالاها</Link>
+                            <Link href="/preInvoices/preInvoices">پیش فاکتورها</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link href="/storage/products">انبار</Link>
@@ -72,6 +72,9 @@ class RightMenu extends Component {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link href="/sales/invoices">فاکتورهای فروش</Link>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Link href="/categories/categories">دسته بندی ها</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h6

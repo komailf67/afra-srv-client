@@ -15,6 +15,7 @@ div.container {
 /* TODO */
 .modal-position {
     width: 130%;
+    z-index: 0
 }
 
 .modal {

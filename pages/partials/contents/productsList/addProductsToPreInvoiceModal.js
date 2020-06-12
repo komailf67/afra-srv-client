@@ -47,7 +47,7 @@ class AddProductsToPreInvoiceModal extends Component {
             let productsToAdd = {};
             productsToAdd['commonDetails'] = commonDetails;
             productsToAdd['uncommonDetails'] = productsDetails;
-            This.props.fetchData('http://automation.afra.local/api/products-list/add-to-pre-invoice', ADD_TO_PRE_INVOICE, productsToAdd);
+            This.props.fetchData('http://automation.afra.local/api/products-list/add-to-pre-invoice', ADD_TO_PRE_INVOICE, productsToAdd, localStorage.getItem('access_token'));
         });
     }
 
@@ -131,7 +131,7 @@ class AddProductsToPreInvoiceModal extends Component {
                     type="button"
                     className="btn btn-success"
                 >
-                    فروش
+                    ثبت
                 </button>
                 <button
                     type="button"
@@ -148,7 +148,7 @@ class AddProductsToPreInvoiceModal extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, actionType, data) => dispatch(dispatchActions(url, actionType, data)),
+        fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
     }
 }
 

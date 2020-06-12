@@ -57,7 +57,6 @@ class PreInvoiceProductsModal extends Component {
 
     render() {
         let {selectedInvoice, is_open_modal, preInvoiceDetails} = this.props;
-
         let detailsRow = [];
         if (preInvoiceDetails && is_open_modal) {
             detailsRow = preInvoiceDetails.data.map((value, index) => {

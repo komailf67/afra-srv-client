@@ -4,6 +4,13 @@ import $ from "jquery";
 
 class AddProductsToPreInvoiceItems extends Component {
 
+    componentDidMount = () => {
+        let This = this;
+        $('input#profit').change(function(){
+           This.calculateSum();
+        });
+    }
+
     // constructor(props) {
     //     super(props);
     //
@@ -27,7 +34,7 @@ class AddProductsToPreInvoiceItems extends Component {
             let count = $(value).find('input.count').val();
             let price = $(value).find('input.price').val();
             let profit = $('input.profit').val();
-            let sumSalePrice = ((1 + (Number(profit) + 9)/100) * (price * count) ).toFixed(2);
+            let sumSalePrice = ((1 + (Number(profit) )/100) * (price * count) ).toFixed(2);
             $(value).find('input.sum-sale-price').val(sumSalePrice);
     //         acceptablePrice = Number(acceptablePrice) + (Number(count) * Number(price) *1.30);
             sumInvoicePrice = (Number(sumInvoicePrice) + Number(sumSalePrice)).toFixed(2);
@@ -39,7 +46,7 @@ class AddProductsToPreInvoiceItems extends Component {
             // sum.push(eachProduct)
         });
 
-        $('#invoice-sum').val(sumInvoicePrice);
+        $('#invoice-sum').val((sumInvoicePrice*1.09).toFixed(2));
     //     $('#acceptable-sum').val(acceptablePrice);
     }
     render() {

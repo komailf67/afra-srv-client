@@ -57,7 +57,7 @@ class OrderProductsModal extends Component {
 
     render() {
         let {selectedInvoice, is_open_modal, orderDetails} = this.props;
-
+        console.log('ddddddddddddddddddddd', orderDetails)
         let detailsRow = [];
         if (orderDetails && is_open_modal) {
             detailsRow = orderDetails.data.map((value, index) => {
