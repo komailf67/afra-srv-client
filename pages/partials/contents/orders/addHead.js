@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Form, Container, Row, Button, Card, ListGroup, Col } from 'react-bootstrap';
 import {connect} from "react-redux";
 import { products, dispatchActions } from "../../../../redux/actions";
-import { CATEGORIES, ADD_ORDERS, IS_FORM_SUBMITTED, PRODUCTS_DESCRIPTIONS } from "../../consts/actionsConstants";
+import {
+    CATEGORIES,
+    ADD_ORDERS,
+    IS_FORM_SUBMITTED,
+    PRODUCTS_DESCRIPTIONS
+} from "../../consts/actionsConstants";
 import $ from "jquery";
 import dynamic from "next/dynamic";
 import Autocomplete from "../../Autocomplete";
@@ -73,7 +78,20 @@ class AddHead extends Component {
         let orders = {};
         orders['commonDetails'] = buyerDetails;
         orders['uncommonDetails'] = newOrder;
-        this.props.fetchData('http://automation.afra.local/api/orders', ADD_ORDERS, orders, localStorage.getItem('access_token'));
+
+        let formFilled = true;
+        $.each(buyerDetails, function (key, value) {
+            if (!value || value == 0) {
+                alert('پر کردن همه فیلدها الزامی است');
+                formFilled = false;
+                return false;
+            }
+        });
+
+        if (formFilled) {
+            this.props.fetchData('http://automation.afra.local/api/orders', ADD_ORDERS, orders, localStorage.getItem('access_token'));
+        }
+
     }
 
     resetForm = () => {
