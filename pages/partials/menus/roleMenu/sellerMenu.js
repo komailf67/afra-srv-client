@@ -23,7 +23,6 @@ class SellerMenu extends Component {
         });
     }
     render() {
-        console.log('dddddd',  localStorage.getItem('role'))
         const onClickHandler = (href) => {
             return e => {
                 e.preventDefault()

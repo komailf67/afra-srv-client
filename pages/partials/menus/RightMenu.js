@@ -3,11 +3,20 @@ import AdminMenu from "./roleMenu/adminMenu";
 import SellerMenu from "./roleMenu/sellerMenu";
 
 class RightMenu extends Component {
+    state = {
+        role: ''
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            role: localStorage.getItem('role')
+        })
+    }
 
     render() {
         let menu;
 
-        switch (localStorage.getItem('role')) {
+        switch (this.state.role) {
             case 'admin' :
                 menu = <AdminMenu/>
                 break;

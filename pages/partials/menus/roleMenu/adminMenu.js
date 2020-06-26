@@ -22,7 +22,6 @@ class AdminMenu extends Component {
         });
     }
     render() {
-        console.log('dddddd',  localStorage.getItem('role'))
         const onClickHandler = (href) => {
             return e => {
                 e.preventDefault()
@@ -74,6 +73,9 @@ class AdminMenu extends Component {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Link href="/categories/categories">دسته بندی ها</Link>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Link href="/users/manage-users">مدیریت کاربران</Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h6
