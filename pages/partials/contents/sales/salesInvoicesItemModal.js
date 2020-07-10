@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Table, Form, Col, InputGroup, FormControl } from "react-bootstrap";
 import $ from "jquery";
+import SoldProductsItem from "./soldProductsItem";
 
 class SalesInvoicesItemModal extends Component {
 
@@ -48,18 +49,41 @@ class SalesInvoicesItemModal extends Component {
         for (let index = 1; index <= exist_count; index++) {
             ExistCountRows.push(<option>{index}</option>)
         }
+
+        let serialRows = [];
+        if (product.serials.length > 0) {
+            serialRows = product.serials.map((value, index) => {
+                return [
+                    <div>
+                        <input type="checkbox" id={`${product.id}`+ index} />
+                        <label htmlFor={`${product.id}`+ index}> {value.serial_number} </label>
+                    </div>
+                    ];
+            });
+        }
         return (
             <tr className="product-for-sale">
-                <td className="product-id" data-product-id={product.id}>{product.id}</td>
-                <td>{product.categoryTitle}</td>
-                <td>{product.description}</td>
-                <td className="buy-price" data-buy-price={product.buy_price}>{product.buy_price}</td>
+                <td className="product-id" data-product-id={product.id}>
+                    {product.id}
+                </td>
+                <td>
+                    {product.categoryTitle}
+                </td>
+                <td>
+                    {product.description}
+                </td>
+                <td className="buy-price" data-buy-price={product.buy_price}>
+                    {product.buy_price}
+                </td>
                 <td>
                     <Form.Group as={Col}>
                         <Form.Control className="exist_count" as="select" value={this.state.exist_count} onChange={this.updateCategorySelectBox}>
                             {ExistCountRows}
                         </Form.Control>
                     </Form.Group>
+                </td>
+                <td style={{'direction': 'ltr'}}>
+                    {serialRows}
                 </td>
                 <td>
                     <Form.Group as={Col}

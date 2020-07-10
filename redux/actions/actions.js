@@ -25,9 +25,15 @@ import {
     ADD_TO_PRE_INVOICE,
     PRE_INVOICES,
     SHOW_ONE_PRE_INVOICE_DETAILS,
-    ADD_CATEGORY
+    ADD_CATEGORY,
+    ERROR,
+    UPDATE_ACCESS,
+    CHECK_ORDERS_ACCESS,
+    USERS
 } from '../../pages/partials/consts/actionsConstants.js';
 import axios from 'axios';
+import Router from "next/router";
+import {CHECK_PRE_INVOICES_ACCESS, CHECK_STORAGE_ACCESS} from "../../pages/partials/consts/actionsConstants";
 
 
 // Actions
@@ -195,6 +201,13 @@ export const selectedProducts = (selectedProductsIds) => {
     }
 }
 
+export const updateAccess = (access) => {
+    return {
+        type: UPDATE_ACCESS,
+        payload: access
+    }
+}
+
 /**
  *
  * @param {*} saleProducts
@@ -226,6 +239,41 @@ export const messageShowed = (trueOrFalse) => {
     }
 }
 
+export const errorPage = (error) => {
+    return {
+        type: ERROR,
+        payload: error
+    }
+}
+
+export const getUsers = (users) => {
+    return {
+        type: USERS,
+        payload: users
+    }
+}
+
+export const checkOrdersAccess = (success) => {
+    return {
+        type: CHECK_ORDERS_ACCESS,
+        payload: success
+    }
+}
+
+export const checkPreInvoicesAccess = (success) => {
+    return {
+        type: CHECK_PRE_INVOICES_ACCESS,
+        payload: success
+    }
+}
+
+export const checkStorageAccess = (success) => {
+    return {
+        type: CHECK_STORAGE_ACCESS,
+        payload: success
+    }
+}
+
 export function dispatchActions(url, actionType, data, token) {
     return (dispatch) => {
         let config = {
@@ -235,7 +283,6 @@ export function dispatchActions(url, actionType, data, token) {
             case IS_TOKEN_VALID:
                 axios.get(url, data)
                     .then((response) => {
-                        console.log('aaaaaaaaaaaaaaaaaaa', response)
                         let {success, message} = response.data;
                         if (success) {
                             dispatch(isTokenValid(success))
@@ -261,7 +308,10 @@ export function dispatchActions(url, actionType, data, token) {
                     .then((response) => {
                         dispatch(orders(response.data))
                         return response;
-                    })
+                    }).catch(e => {
+                    dispatch(errorPage(e.response.data))
+                    Router.push('/error');
+                })
                 break;
             case SHOW_ONE_ORDER_DETAILS:
                 axios.get(url, config)
@@ -274,7 +324,6 @@ export function dispatchActions(url, actionType, data, token) {
             case SHOW_ONE_PRE_INVOICE_DETAILS:
                 axios.get(url, config)
                     .then((response) => {
-                        console.log('eeeeeeeeeeeeeeeeee', response)
                         dispatch(showOnePreInvoiceDetails(response.data))
                         return response;
                     })
@@ -285,7 +334,10 @@ export function dispatchActions(url, actionType, data, token) {
                     .then((response) => {
                         dispatch(productsList(response.data))
                         return response;
-                    })
+                    }).catch(e => {
+                    dispatch(errorPage(e.response.data))
+                    Router.push('/error');
+                })
                 break;
             case ADD_TO_PRODUCTS_LIST:
                 axios.post(url, data, config)
@@ -386,7 +438,7 @@ export function dispatchActions(url, actionType, data, token) {
                         }
                     })
                     .catch(e => {
-                        console.log(e);
+                        dispatch(isFormSubmitted('', e.response.data.message))
                     })
                 break;
             case ADD_PRODUCTS:
@@ -405,7 +457,7 @@ export function dispatchActions(url, actionType, data, token) {
                 })
                 break;
             case IS_FORM_SUBMITTED:
-                dispatch(isFormSubmitted(data))
+                dispatch(isFormSubmitted('', data))
                 break;
             case MESSAGE_SHOWED:
                 dispatch(messageShowed(data))
@@ -441,6 +493,57 @@ export function dispatchActions(url, actionType, data, token) {
                         dispatch(soldProducts(response.data))
                         return response;
                     })
+                break;
+            case USERS:
+                axios.get(url, config)
+                    .then((response) => {
+                        dispatch(getUsers(response.data))
+                        return response;
+                    })
+                break;
+            case UPDATE_ACCESS:
+                axios.post(url, data, config)
+                    .then((response) => {
+                        let {message, success} = response.data;
+                        dispatch(isFormSubmitted(success, message))
+                        if (success) {
+                            dispatch(updateAccess(response.data))
+                        }
+                        return response;
+                    }).catch(e => {
+                    dispatch(isFormSubmitted('', e.response.data.message))
+                })
+                break;
+            case CHECK_ORDERS_ACCESS:
+                axios.post(url, data, config)
+                    .then((response) => {
+                        dispatch(checkOrdersAccess(true))
+                    }).catch(e => {
+                        if (!e.response.data.success && e.response.data.error.code === 403){
+                            dispatch(checkOrdersAccess(false))
+                        }
+                })
+                break;
+            case CHECK_PRE_INVOICES_ACCESS:
+                axios.post(url, data, config)
+                    .then((response) => {
+                        dispatch(checkPreInvoicesAccess(true))
+                    }).catch(e => {
+                    if (!e.response.data.success && e.response.data.error.code === 403){
+                        dispatch(checkPreInvoicesAccess(false))
+                    }
+                })
+                break;
+
+            case CHECK_STORAGE_ACCESS:
+                axios.post(url, data, config)
+                    .then((response) => {
+                        dispatch(checkStorageAccess(true))
+                    }).catch(e => {
+                    if (!e.response.data.success && e.response.data.error.code === 403){
+                        dispatch(checkStorageAccess(false))
+                    }
+                })
                 break;
             default:
                 break;

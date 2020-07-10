@@ -1,4 +1,9 @@
-import {ADD_ORDERS, ORDERS, SHOW_ONE_ORDER_DETAILS} from "../../pages/partials/consts/actionsConstants";
+import {
+    ADD_ORDERS,
+    CHECK_ORDERS_ACCESS,
+    ORDERS,
+    SHOW_ONE_ORDER_DETAILS
+} from "../../pages/partials/consts/actionsConstants";
 
 const initialState = {
     orders: []
@@ -21,6 +26,11 @@ export const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 orderDetails: action.payload
+            }
+        case CHECK_ORDERS_ACCESS:
+            return {
+                ...state,
+                ordersAccess: action.payload
             }
         default:
             return state

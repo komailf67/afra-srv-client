@@ -9,6 +9,8 @@ import {ordersReducer} from "./orderReducers";
 import {productsListReducer} from "./productsListReducer";
 import {preInvoicesReducer} from "./preInvoicesReducer";
 import {authReducers} from "./authReducers";
+import {errorsReducer} from "./errorsReducer";
+import {usersReducer} from "./usersReducer";
 
 const rootReduces = combineReducers({
     auth: authReducers,
@@ -21,6 +23,8 @@ const rootReduces = combineReducers({
     orders: ordersReducer,
     productsList: productsListReducer,
     preInvoices: preInvoicesReducer,
+    error: errorsReducer,
+    users: usersReducer,
 });
 
 export default rootReduces;

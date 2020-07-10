@@ -1,8 +1,6 @@
 import React , { Component } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import RightMenu from "./partials/menus/RightMenu";
 import { Card , Container , Row , Col } from "react-bootstrap";
-import './styles.css';
 
 class Home extends Component {
 

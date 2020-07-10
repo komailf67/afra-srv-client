@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { Form, Container, Row, Button, Card, ListGroup, Col } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Form, Container, Row, Button, Card, ListGroup, Col} from 'react-bootstrap';
 import {connect} from "react-redux";
-import { products, dispatchActions } from "../../../../redux/actions";
+import {products, dispatchActions} from "../../../../redux/actions";
 import {
     CATEGORIES,
     ADD_ORDERS,
     IS_FORM_SUBMITTED,
-    PRODUCTS_DESCRIPTIONS
+    PRODUCTS_DESCRIPTIONS, CHECK_ORDERS_ACCESS
 } from "../../consts/actionsConstants";
 import $ from "jquery";
 import dynamic from "next/dynamic";
 import Autocomplete from "../../Autocomplete";
+import Loading from "../../../../Components/Loading/Loading";
 const DatePicker = dynamic(()=> import('react-datepicker2'),{ssr:false})
 const momentJalaali = dynamic(()=> import('moment-jalaali'),{ssr:false})
 
@@ -25,13 +26,14 @@ class AddHead extends Component {
         }
     }
 
-    updateCategorySelectBox = (newCategory) => {              
+    updateCategorySelectBox = (newCategory) => {
         this.setState({
             category: newCategory.value
         });
     }
-    
+
     componentDidMount = () => {
+        this.props.fetchData('http://automation.afra.local/api/access/check-access', CHECK_ORDERS_ACCESS, {'accessName': 'orders'}, localStorage.getItem('access_token'))
         this.props.fetchData('http://automation.afra.local/api/categories', CATEGORIES)
         this.props.fetchData('http://automation.afra.local/api/products/descriptions', PRODUCTS_DESCRIPTIONS)
         //START jquery functions
@@ -43,7 +45,7 @@ class AddHead extends Component {
     }
 
     componentDidUpdate = () => {
-        if (this.props.isFormSubmitted) {           
+        if (this.props.isFormSubmitted) {
             this.resetForm()
         }
     }
@@ -95,7 +97,7 @@ class AddHead extends Component {
     }
 
     resetForm = () => {
-        if (this.props.isFormSubmitted) {           
+        if (this.props.isFormSubmitted) {
             alert('سفارش با موفقیت اضافه شد');
             $('.btn-danger').parents('.uncommon-inputs').remove();
             $('form').find("input").val("");
@@ -105,11 +107,18 @@ class AddHead extends Component {
     }
 
     render() {
-        let { categories, productsDescriptions } = this.props;
+        let {categories, productsDescriptions, ordersAccess} = this.props;
+
+        if (typeof ordersAccess === "undefined") {
+            return <Loading/>
+        } else if (typeof ordersAccess === "boolean" && ordersAccess === false) {
+            return <h5>شما اجازه دسترسی به این صفحه را ندارید</h5>
+        }
+
         let categoryRow = [];
         if (categories) {
             categoryRow = categories.map((value, index) => {
-            return [<option className="product-data" key={index} data-category-id={value.id}>{value.title}</option>]
+                return [<option className="product-data" key={index} data-category-id={value.id}>{value.title}</option>]
             })
         }
         return (
@@ -117,11 +126,11 @@ class AddHead extends Component {
                 <Form.Row>
                     <Form.Group as={Col} className="input" controlId="seller">
                         <Form.Label>نام خریدار</Form.Label>
-                        <Form.Control type="text" placeholder="" />
+                        <Form.Control type="text" placeholder=""/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="phone-number">
                         <Form.Label>شماره تماس</Form.Label>
-                        <Form.Control type="number" placeholder="" />
+                        <Form.Control type="number" placeholder=""/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row className="uncommon-inputs">
@@ -129,11 +138,12 @@ class AddHead extends Component {
                         <Form.Label>دسته بندی</Form.Label>
                         <div className="d-flex">
                             <Button className="ml-1 new-product"
-                                onClick={(event) => {
-                                    this.addNewProductInputs()
-                                }}
-                                variant="success">+</Button>{' '}
-                            <Form.Control className="category" as="select" value={this.state.category} onChange={this.updateCategorySelectBox}>
+                                    onClick={(event) => {
+                                        this.addNewProductInputs()
+                                    }}
+                                    variant="success">+</Button>{' '}
+                            <Form.Control className="category" as="select" value={this.state.category}
+                                          onChange={this.updateCategorySelectBox}>
                                 <option>Choose...</option>
                                 {categoryRow}
                             </Form.Control>
@@ -158,6 +168,7 @@ class AddHead extends Component {
         )
     }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url, actionType, data, token) => dispatch(dispatchActions(url, actionType, data, token)),
@@ -167,7 +178,8 @@ const mapStateToProps = (state) => {
     return {
         categories: state.categories.categories.data,
         isFormSubmitted: state.formReducer.isFormSubmitted,
-        productsDescriptions: state.products.productsDescriptions.data
+        productsDescriptions: state.products.productsDescriptions.data,
+        ordersAccess: state.orders.ordersAccess
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddHead);

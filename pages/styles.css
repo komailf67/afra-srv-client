@@ -32,3 +32,8 @@ div.container {
     cursor: pointer;
     color: blue;
 }
+
+.checkbox-in-table {
+    display: flex;
+    justify-content: center;
+}

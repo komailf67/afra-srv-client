@@ -26,7 +26,7 @@ class categoriesHead extends Component {
             });
         }
 
-        if (!isFormSubmitted && message) {
+        if (message) {
             alert(message)
             this.props.fetchData('', IS_FORM_SUBMITTED, false)
         }

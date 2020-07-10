@@ -1,20 +1,13 @@
 import React, {Component} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import RightMenu from "./partials/menus/RightMenu";
-import {Card, Container, Row, Col} from "react-bootstrap";
-import './styles.css';
-import Content from "./partials/Content";
-import Head from "./partials/contents/sales/soldProductsHead";
 import Login from "./auth/login";
 import Home from "./home";
 import {
     IS_TOKEN_VALID,
     LOADING,
 } from "./partials/consts/actionsConstants";
-import axios from 'axios';
 import {dispatchActions} from "../redux/actions";
 import {connect} from "react-redux";
-import Loading from "./partials/Loading";
+import Loading from "../Components/Loading/Loading";
 
 
 class Index extends Component {
@@ -43,7 +36,6 @@ class Index extends Component {
                 componentToShow = <Login/>;
                 break;
             default:
-                // componentToShow = <Login />;
                 componentToShow = <Loading/>;
                 break;
         }

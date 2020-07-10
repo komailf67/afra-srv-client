@@ -13,6 +13,7 @@ import AddHead from "./addHead";
 import $ from "jquery";
 import AddProductsToStorageModal from "./addProductsToStorageModal";
 import AddProductsToPreInvoiceModal from "./addProductsToPreInvoiceModal";
+import Loading from "../../../../Components/Loading/Loading";
 
 class productsListHead extends Component {
 
@@ -59,6 +60,11 @@ class productsListHead extends Component {
     render() {
         let {productsList, categories, newProductsList, messageShowed, is_open_modal, selectedProducts, selectedProductsForPreInvoice} = this.props;
         let productsRow = [];
+
+        if (typeof productsList === "undefined") {
+            return <Loading/>
+        }
+
         if (productsList) {
             productsRow = productsList.map((value, index) => {
                 return [<ProductsListItem key={index} row={index} products={value}/>];
@@ -69,7 +75,6 @@ class productsListHead extends Component {
             let {message, success} = newProductsList;
 
             if (!messageShowed) {
-                // alert(message);
                 this.props.fetchData('', MESSAGE_SHOWED, 1);
             }
             if (success) {
@@ -86,7 +91,7 @@ class productsListHead extends Component {
         }
         if (is_open_modal && selectedProductsForPreInvoice && this.state.buttonClicked == 'to-pre-invoice') {
             addProductToStorageModal = <AddProductsToPreInvoiceModal is_open_modal={is_open_modal}
-                                                                  selectedProducts={selectedProductsForPreInvoice}
+                                                                     selectedProducts={selectedProductsForPreInvoice}
             />
         }
 

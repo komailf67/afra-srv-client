@@ -5,6 +5,7 @@ import OrdersItem from "./ordersItem";
 import { products, dispatchActions, selectedProducts } from "../../../../redux/actions";
 import {IS_OPEN_MODAL, ORDERS} from "../../consts/actionsConstants";
 import OrderProductsModal from "./orderProductsModal";
+import Loading from "../../../../Components/Loading/Loading";
 
 
 
@@ -25,6 +26,10 @@ class OrdersHead extends Component {
     render() {
         let { orders, is_open_modal, orderDetails } = this.props;
         let orderRow = [];
+
+        if (typeof orders === "undefined") {
+            return <Loading/>
+        }
 
         if (orders) {
             orderRow = orders.map((value, index) => {

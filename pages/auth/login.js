@@ -20,10 +20,10 @@ class Login extends Component {
             // role: $('#roles').val()
         })
             .then(response => {
-                console.log('eeeeeeeeeeeeeeee', response)
-                let {success, message, token, role} = response.data;
+                let {success, message, token, user} = response.data;
                 localStorage.setItem('access_token', token);
-                localStorage.setItem('role', role);
+                localStorage.setItem('role', user.roles);
+                localStorage.setItem('user_access', JSON.stringify(user.user_access));
                 window.location.replace("/");
             }).catch(error => {
         })

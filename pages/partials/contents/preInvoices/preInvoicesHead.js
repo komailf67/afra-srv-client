@@ -3,7 +3,13 @@ import { Table, Button } from "react-bootstrap";
 import {connect} from "react-redux";
 import PreInvoicesItem from "./preInvoicesItem";
 import { products, dispatchActions, selectedProducts } from "../../../../redux/actions";
-import {IS_OPEN_MODAL, PRE_INVOICES} from "../../consts/actionsConstants";
+import {
+    CHECK_ORDERS_ACCESS,
+    CHECK_PRE_INVOICES_ACCESS,
+    IS_OPEN_MODAL,
+    PRE_INVOICES
+} from "../../consts/actionsConstants";
+import Loading from "../../../../Components/Loading/Loading";
 import PreInvoiceProductsModal from "./preInvoiceProductsModal";
 
 
@@ -19,11 +25,19 @@ class OrdersHead extends Component {
 
     componentDidMount = () => {
         let token = localStorage.getItem('access_token');
+        this.props.fetchData('http://automation.afra.local/api/access/check-access', CHECK_PRE_INVOICES_ACCESS, {'accessName': 'pre_invoices'}, localStorage.getItem('access_token'))
         this.props.fetchData('http://automation.afra.local/api/pre-invoices', PRE_INVOICES, '', token);
     }
 
     render() {
-        let { preInvoices, is_open_modal, preInvoiceDetails } = this.props;
+        let { preInvoices, is_open_modal, preInvoiceDetails, preInvoicesAccess } = this.props;
+
+        if (typeof preInvoicesAccess === "undefined") {
+            return <Loading/>
+        } else if (typeof preInvoicesAccess === "boolean" && preInvoicesAccess === false) {
+            return <h5>شما اجازه دسترسی به این صفحه را ندارید</h5>
+        }
+
         let preInvoiceRow = [];
 
         if (preInvoices) {
@@ -73,6 +87,7 @@ const mapStateToProps = (state) => {
         preInvoices: state.preInvoices.preInvoices.data,
         is_open_modal: state.isOpenModal.is_open_modal,
         preInvoiceDetails: state.preInvoices.preInvoiceDetails,
+        preInvoicesAccess: state.preInvoices.preInvoicesAccess
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersHead);

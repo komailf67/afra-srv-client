@@ -111,6 +111,7 @@ class SaleModal extends Component {
                                 <th>عنوان</th>
                                 <th>قیمت خرید</th>
                                 <th>تعداد</th>
+                                <th>سریال نامبر</th>
                                 <th>قیمت مجموع</th>
                             </tr>
                         </thead>
@@ -121,12 +122,14 @@ class SaleModal extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td>مجموع فاکتور</td>
                                 <td>
                                     <input id="invoice-sum" value="" disabled/> 
                                 </td>
                             </tr>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

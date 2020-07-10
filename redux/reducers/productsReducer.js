@@ -1,4 +1,10 @@
-import {PRODUCTS, PRODUCTS_DESCRIPTIONS, ADD_PRODUCTS, SALE_PRODUCTS} from "../../pages/partials/consts/actionsConstants";
+import {
+    PRODUCTS,
+    PRODUCTS_DESCRIPTIONS,
+    ADD_PRODUCTS,
+    SALE_PRODUCTS,
+    CHECK_ORDERS_ACCESS, CHECK_STORAGE_ACCESS
+} from "../../pages/partials/consts/actionsConstants";
 
 const initialState = {
     products: [],
@@ -43,6 +49,11 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: {data: products}
+            }
+        case CHECK_STORAGE_ACCESS:
+            return {
+                ...state,
+                storageAccess: action.payload
             }
 
         default:
