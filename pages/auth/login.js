@@ -13,7 +13,8 @@ class Login extends Component {
         //TODO error messages
     }
 
-    login = () => {
+    login = (e) => {
+        e.preventDefault();
         axios.post('http://automation.afra.local/api/login', {
             email: $('#email').val(),
             password: $('#password').val(),
@@ -39,7 +40,7 @@ class Login extends Component {
                 <Card className="loginCenter">
                     <Card.Header>ورود</Card.Header>
                     <Card.Body>
-                        <Form>
+                        <Form onSubmit={this.login}>
                             <Form.Group as={Col} controlId="email">
                                 <Form.Label>ایمیل</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email"/>
@@ -50,9 +51,7 @@ class Login extends Component {
                                 <Form.Control type="password" placeholder="Password"/>
                             </Form.Group>
 
-                            <Button variant="primary" type="button" onClick={() => {
-                                this.login()
-                            }}>
+                            <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                         </Form>
